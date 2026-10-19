@@ -1,0 +1,8 @@
+pandas>=2.2,<4
+numpy>=1.26,<3
+scikit-learn>=1.8,<1.10
+scipy>=1.12,<2
+joblib>=1.3,<2
+geosky==1.0.9
+matplotlib>=3.8,<4
+seaborn>=0.13,<0.14

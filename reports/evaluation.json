@@ -1,0 +1,105 @@
+{
+  "seed": 42,
+  "dataset_sha256": "61111c6dc31eaffa34d1e1fa62e2395325c9bc3b38bba1941a5f1ed9b3fa60df",
+  "versions": {
+    "python": "3.12.10",
+    "scikit_learn": "1.9.0",
+    "pandas": "3.0.3",
+    "numpy": "2.4.6",
+    "joblib": "1.5.3"
+  },
+  "data": {
+    "n_total": 7613,
+    "n_train": 6090,
+    "n_holdout": 1523,
+    "class_counts": {
+      "0": 4342,
+      "1": 3271
+    },
+    "duplicate_normalized_texts": 112,
+    "conflicting_label_groups": 18,
+    "overlapping_groups": 0
+  },
+  "protocol": {
+    "holdout": "First fold of seeded 5-fold StratifiedGroupKFold (~20%)",
+    "split_timing": "Raw rows partitioned before exploratory feature engineering; notebook exploration restricted to training rows",
+    "selection": "Best mean positive-class F1 in 3-fold grouped CV on training only",
+    "grouping": "Model-normalized text, lowercased and whitespace-normalized",
+    "threshold": 0.5,
+    "interval_scope": "Holdout sampling uncertainty conditional on a fixed model; not per-tweet uncertainty",
+    "final_model": "Selected configuration refitted on all labeled rows after holdout evaluation"
+  },
+  "limitations": [
+    "Retrospective evaluation: the feature set originated in exploration of this same corpus.",
+    "Grouping prevents normalized duplicate leakage, not near-duplicate or shared-event leakage.",
+    "Intervals exclude retraining, model selection and distribution shift uncertainty.",
+    "Probabilities are not recalibrated; balanced class weights do not guarantee calibration.",
+    "No externally verified Kaggle score, temporal validation or operational alerting claim."
+  ],
+  "cv": {
+    "logistic_regression": {
+      "mean_f1": 0.7404423022908274,
+      "std_f1": 0.016187327783808683,
+      "best_params": {
+        "clf__C": 1.0,
+        "clf__class_weight": "balanced"
+      }
+    },
+    "random_forest": {
+      "mean_f1": 0.688137739552889,
+      "std_f1": 0.007475849490582354,
+      "best_params": {
+        "clf__class_weight": "balanced",
+        "clf__max_depth": null
+      }
+    }
+  },
+  "selected_model": "logistic_regression",
+  "holdout_metrics": {
+    "accuracy": 0.8003939592908733,
+    "precision": 0.7777777777777778,
+    "recall": 0.7492354740061162,
+    "f1": 0.7632398753894081,
+    "roc_auc": 0.8616128771163029,
+    "average_precision": 0.8617904982559648,
+    "brier": 0.14932220124014908
+  },
+  "holdout_intervals": {
+    "accuracy": {
+      "lower": 0.7800511878092957,
+      "upper": 0.8207708916900094,
+      "confidence": 0.95,
+      "n_bootstrap": 2000,
+      "method": "percentile_group_bootstrap_fixed_model"
+    },
+    "f1": {
+      "lower": 0.7358934177587594,
+      "upper": 0.7900150447310456,
+      "confidence": 0.95,
+      "n_bootstrap": 2000,
+      "method": "percentile_group_bootstrap_fixed_model"
+    }
+  },
+  "confusion_matrix": [
+    [
+      729,
+      140
+    ],
+    [
+      164,
+      490
+    ]
+  ],
+  "baseline": {
+    "strategy": "prior (majority class for predict)",
+    "metrics": {
+      "accuracy": 0.5705843729481287,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "roc_auc": 0.5,
+      "average_precision": 0.4294156270518713,
+      "brier": 0.2450179394589232
+    }
+  }
+}
